@@ -19,6 +19,21 @@ struct node * create(int value){
 
 }
 
+struct node * search(struct node* root, int key){
+    if(root==NULL){
+        return NULL;
+    }
+    if(key==root->data){
+        return root;
+    }
+    else if(key<root->data){
+        return search(root->left, key);
+    }
+    else{
+        return search(root->right, key);
+    }
+}
+
 void PreOrder(struct node * root){
     
     if(root != NULL){
@@ -50,19 +65,19 @@ void InOrder(struct node * root){
     }
 }
    // Finally The tree looks like this:
-    //      4
+    //      5
     //     / \
-    //    1   6
+    //    3   6
     //   / \
-    //  5   2  
+    //  1   4  
 
 int main (){
 
-    struct node *p = create(4);
-    struct node *p1 = create(1);
+    struct node *p = create(5);
+    struct node *p1 = create(3);
     struct node *p2 = create(6);
-    struct node *p3 = create(5);
-    struct node *p4 = create(2);
+    struct node *p3 = create(1);
+    struct node *p4 = create(4);
 
     p -> left = p1;
     p -> right = p2;
@@ -74,5 +89,13 @@ int main (){
 PostOrder(p);
 printf("\n");
 InOrder(p);
+printf("\n");
+   struct node* n = search(p, 18);
+    if(n!=NULL){
+    printf("Found: %d", n->data);
+    }
+    else{
+        printf("Element not found");
+    }
     return 0;
 }
